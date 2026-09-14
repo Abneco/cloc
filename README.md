@@ -336,6 +336,7 @@ cloc has many features that make it easy to use, thorough, extensible, and porta
 
 If cloc does not suit your needs here are other freely available counters to consider:
 
+*   [mezura](https://github.com/subamanis/mezura)
 *   [loc](https://github.com/cgag/loc/)
 *   [gcloc](https://github.com/JoaoDanielRufino/gcloc)
 *   [gocloc](https://github.com/hhatto/gocloc/)
@@ -346,6 +347,11 @@ If cloc does not suit your needs here are other freely available counters to con
 *   [Sonar](http://www.sonarsource.org/)
 *   [tokei](https://github.com/Aaronepower/tokei/)
 *   [Unified Code Count](http://csse.usc.edu/ucc_new/wordpress/)
+
+The [LineJudge](https://github.com/loc-conformance/linejudge) project
+[compares](https://loc-conformance.github.io/linejudge/)
+source code line counter on accuracy, notably for complex cases like comment markers
+embedded in string literals and templates.
 
 Other references:
 
