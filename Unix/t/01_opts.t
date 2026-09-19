@@ -400,22 +400,28 @@ my @Tests = (
                    'ref'  => '../tests/outputs/issues/472/not_really.lua.yaml',
                },
                {
-                   'name' => '--exclude-lang --diff 1/3, #476',
+                   'name' => '--exclude-lang --diff 1/4, #476',
                    'cd'   => '../tests/inputs/issues/476',
                    'args' => '--diff A B',
                    'ref'  => '../tests/outputs/issues/476/all.yaml',
                },
                {
-                   'name' => '--exclude-lang --diff 2/3, #476',
+                   'name' => '--exclude-lang --diff 2/4, #476',
                    'cd'   => '../tests/inputs/issues/476',
                    'args' => "--exclude-lang 'Fortran 90' --diff A B",
                    'ref'  => '../tests/outputs/issues/476/no_fortran.yaml',
                },
                {
-                   'name' => '--exclude-lang --diff 3/3, #476',
+                   'name' => '--exclude-lang --diff 3/4, #476',
                    'cd'   => '../tests/inputs/issues/476',
                    'args' => "--exclude-lang C++ --diff A B",
                    'ref'  => '../tests/outputs/issues/476/no_cpp.yaml',
+               },
+               {
+                   'name' => '--exclude-lang --diff 4/4, #989 (case insensitive)',
+                   'cd'   => '../tests/inputs/issues/476',
+                   'args' => "--exclude-lang 'fortran 90' --diff A B",
+                   'ref'  => '../tests/outputs/issues/476/no_fortran.yaml',
                },
                # Next test, 482, requires an empty directory B.  Git
                # does not like this so create it at runtime.

@@ -527,7 +527,7 @@ die "\n" unless $getopt_success;
 print $usage and exit if $opt_help;
 my $Archive_Extension_re = qr/\.(tar(\.xz|\.gz|\.bz2|\.7z)?|tgz|gem|zip|ear|srpm|src\.rpm)$/;
 my %Exclude_Language = ();
-   %Exclude_Language = map { $_ => 1 } split(/,/, $opt_exclude_lang)
+   %Exclude_Language = map { lc($_) => 1 } split(/,/, $opt_exclude_lang)
         if $opt_exclude_lang;
 my %Exclude_Dir      = ();
    %Exclude_Dir      = map { $_ => 1 } split(/,/, $opt_exclude_dir )
@@ -2264,8 +2264,8 @@ Usage: $script [options] <file(s)/dir(s)/git hash(es)> | <set 1> <set 2> | <repo
                              Do not count files having the given file name
                              extensions.
    --exclude-lang=<L1>[,L2[...]]
-                             Exclude the given comma separated languages
-                             L1, L2, L3, et cetera, from being counted.
+                             Exclude the given comma separated, case insensitive
+                             languages L1, L2, L3, et cetera, from being counted.
    --exclude-list-file=<file>  Ignore files and/or directories whose names
                              appear in <file>.  <file> should have one file
                              name per line.  Only exact matches are ignored;
@@ -2744,7 +2744,7 @@ sub count_files {                            # {{{1
             $p_ignored{$file} = "not in --include-lang=$opt_include_lang";
             next;
         }
-        if ($Exclude_Language{$Language{$file}}) {
+        if ($Exclude_Language{lc($Language{$file})}) {
             $p_ignored{$file} = "--exclude-lang=$Language{$file}";
             next;
         }
@@ -2854,7 +2854,7 @@ sub count_filesets {                         # {{{1
             next unless defined $Language{$fset}{$file};
             my $Lang = $Language{$fset}{$file};
             next if $Lang eq '(unknown)';
-            if ($Exclude_Language{$Lang}) {
+            if ($Exclude_Language{lc($Lang)}) {
                 $p_ignored{$file} = "--exclude-lang=$Lang";
                 next;
             }
@@ -2909,7 +2909,7 @@ sub count_filesets {                         # {{{1
             $p_ignored{$f} = "unknown language";
             next;
         }
-        if ($Exclude_Language{$this_lang}) {
+        if ($Exclude_Language{lc($this_lang)}) {
             $p_ignored{$f} = "--exclude-lang=$this_lang";
             next;
         }
@@ -2948,7 +2948,7 @@ sub count_filesets {                         # {{{1
             $p_ignored{$f} = "unknown language";
             next;
         }
-        if ($Exclude_Language{$this_lang}) {
+        if ($Exclude_Language{lc($this_lang)}) {
             $p_ignored{$f} = "--exclude-lang=$this_lang";
             next;
         }
@@ -3027,7 +3027,7 @@ sub count_filesets {                         # {{{1
             next;
         }
         # filter out excluded or unrecognized languages
-        if ($Exclude_Language{$Lang_L} or $Exclude_Language{$Lang_R}) {
+        if ($Exclude_Language{lc($Lang_L)} or $Exclude_Language{lc($Lang_R)}) {
             $p_ignored{$file_L} = "--exclude-lang=$Lang_L";
             $p_ignored{$file_R} = "--exclude-lang=$Lang_R";
             next;
